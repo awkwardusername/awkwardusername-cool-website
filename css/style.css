@@ -9,9 +9,9 @@ html, body {
 html {
   background: url('../img/bkg.jpg');
   /* background: url('../img/1411207249968.gif') center; */
+  background-size: 100% 100%;
   color: fuchsia;
-  font-size: 36px;
-  text-transform: lowercase;
+  font-size: 24px;
   font-family: cursive;
 }
 
@@ -64,19 +64,23 @@ h1 {
 }
 
 .quad-wrapper {
-  display: block;
+  display: inline-block;
+  vertical-align: top;
   padding: 0;
   margin: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .quad-wrapper > * {
   display: inline-block;
+  vertical-align: top;
   padding: 0;
   margin: 0;
   width: 50%;
   height: 50%;
+  overflow: hidden;
 }
 
 .imgbox {
@@ -84,6 +88,7 @@ h1 {
   background-size: 100%;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 #main-content {
