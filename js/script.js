@@ -1,5 +1,6 @@
 (function($) {
     var blinkState = {};
+    var resizeTimeout = false;
 
     function makeBg(sel) {
         $(sel)
@@ -49,9 +50,9 @@
 
             var imgboxIndex = Math.floor(Math.random() * imgboxSrcs.length)
             if(depth >= max)
-                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.35 + Math.random() / 2) + '"></div>';
+                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
             if(Number(new Date()) % 4 == 0 && depth > 1)
-                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.35 + Math.random() / 2) + '"></div>';
+                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
 
             return [
                 '<ul class="quad-wrapper">',
@@ -76,11 +77,20 @@
             .css({
                 position: 'absolute',
                 width: 1600,
-                height: 1200,
-                left: ($(sel).width() - 1600) / 2,
-                top: ($(sel).height() - 1200) / 2
+                height: 1200
             })
             .appendTo(sel);
+    }
+
+    function centerBg(sel) {
+        var quadWrapper =  $(sel).children('.quad-wrapper');
+
+        quadWrapper
+            .css({
+                position: 'absolute',
+                left: ($(sel).width() - quadWrapper.width()) / 2,
+                top: ($(sel).height() - quadWrapper.height()) / 2
+            })
     }
 
     function blinkSel(sel, delay) {
@@ -95,10 +105,17 @@
 
     $(function() {
         makeBg("#homu");
+        centerBg("#homu");
         blinkSel("#main-content > *", 250);
     });
 
     $(window).on('resize', function() {
+        centerBg("#homu");
+    });
+
+    /*
+    $(window).on('resize', function() {
         makeBg("#homu");
-    })
+    }, 250);
+    */
 })(window.jQuery);
