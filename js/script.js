@@ -8,12 +8,50 @@
                 overflow: 'hidden'
             });
 
+        var imgboxSrcs = [
+            'img/imgbox (1).gif',
+            'img/imgbox (2).gif',
+            'img/imgbox (3).gif',
+            'img/imgbox (4).gif',
+            'img/imgbox (5).gif',
+            'img/imgbox (6).gif',
+            'img/imgbox (7).gif',
+            'img/imgbox (8).gif',
+            'img/imgbox (9).gif',
+            'img/imgbox (10).gif',
+            'img/imgbox (11).gif',
+            'img/imgbox (12).gif',
+            'img/imgbox (13).gif',
+            'img/imgbox (14).gif',
+            'img/imgbox (15).gif',
+            'img/imgbox (16).gif',
+            'img/imgbox (17).gif',
+            'img/imgbox (18).gif',
+            'img/imgbox (19).gif',
+            'img/imgbox (20).gif',
+            'img/imgbox (21).gif',
+            'img/imgbox (22).gif',
+            'img/imgbox (23).gif',
+            'img/imgbox (24).gif',
+            'img/imgbox (25).gif',
+            'img/imgbox (26).gif',
+            'img/imgbox (27).gif',
+            'img/imgbox (28).gif',
+            'img/imgbox (29).gif',
+            'img/imgbox (30).gif',
+            'img/imgbox (31).gif',
+            'img/imgbox (32).gif',
+
+        ];
+
         function makeQuadNode(depth) {
             var max = 2 + Math.floor(Math.random() * 3);
+
+            var imgboxIndex = Math.floor(Math.random() * imgboxSrcs.length)
             if(depth >= max)
-                return '<div class="imgbox" style="background-image: url(\'img/1411207249968.gif\'); opacity: ' + (0.35 + Math.random() / 2) + '"></div>';
+                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.35 + Math.random() / 2) + '"></div>';
             if(Number(new Date()) % 4 == 0 && depth > 1)
-                return '<div class="imgbox" style="background-image: url(\'img/1411207249968.gif\'); opacity: ' + (0.35 + Math.random() / 2) + '"></div>';
+                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.35 + Math.random() / 2) + '"></div>';
 
             return [
                 '<ul class="quad-wrapper">',
