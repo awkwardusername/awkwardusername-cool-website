@@ -62,7 +62,16 @@
             'img/imgbox (50).gif',
             'img/imgbox (51).gif',
             'img/imgbox (52).gif',
-            'img/imgbox (53).gif'
+            'img/imgbox (53).gif',
+            'img/imgbox (54).gif',
+            'img/imgbox (55).gif',
+            'img/imgbox (56).gif',
+            'img/imgbox (57).gif',
+            'img/imgbox (58).gif',
+            'img/imgbox (59).gif',
+            'img/imgbox (60).gif',
+            'img/imgbox (61).gif',
+            'img/imgbox (62).gif'
         ];
 
         function makeQuadNode(depth) {
