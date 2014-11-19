@@ -1,82 +1,28 @@
 (function($) {
+	// state for blinking text
     var blinkState = {};
+    
     var resizeTimeout = false;
 
+	// the awesomesauce
     function makeBg(sel) {
+		// remove those ugly scrollbars!
         $(sel)
             .text('')
             .css({
                 overflow: 'hidden'
             });
+            
+        // the images we have <del>stolen</del>
+        var imgCount = 85,
+			imgboxSrcs = [];
+        
+        // super one-liner (technically) loop.
+        for(var i = 1; i <= imgCount; imgboxSrcs.push(
+			'img/imgbox (' + i++ + ').gif'
+		));
 
-        var imgboxSrcs = [
-            'img/imgbox (1).gif',
-            'img/imgbox (2).gif',
-            'img/imgbox (3).gif',
-            'img/imgbox (4).gif',
-            'img/imgbox (5).gif',
-            'img/imgbox (6).gif',
-            'img/imgbox (7).gif',
-            'img/imgbox (8).gif',
-            'img/imgbox (9).gif',
-            'img/imgbox (10).gif',
-            'img/imgbox (11).gif',
-            'img/imgbox (12).gif',
-            'img/imgbox (13).gif',
-            'img/imgbox (14).gif',
-            'img/imgbox (15).gif',
-            'img/imgbox (16).gif',
-            'img/imgbox (17).gif',
-            'img/imgbox (18).gif',
-            'img/imgbox (19).gif',
-            'img/imgbox (20).gif',
-            'img/imgbox (21).gif',
-            'img/imgbox (22).gif',
-            'img/imgbox (23).gif',
-            'img/imgbox (24).gif',
-            'img/imgbox (25).gif',
-            'img/imgbox (26).gif',
-            'img/imgbox (27).gif',
-            'img/imgbox (28).gif',
-            'img/imgbox (29).gif',
-            'img/imgbox (30).gif',
-            'img/imgbox (31).gif',
-            'img/imgbox (32).gif',
-            'img/imgbox (33).gif',
-            'img/imgbox (34).gif',
-            'img/imgbox (35).gif',
-            'img/imgbox (36).gif',
-            'img/imgbox (37).gif',
-            'img/imgbox (38).gif',
-            'img/imgbox (39).gif',
-            'img/imgbox (40).gif',
-            'img/imgbox (41).gif',
-            'img/imgbox (42).gif',
-            'img/imgbox (43).gif',
-            'img/imgbox (44).gif',
-            'img/imgbox (45).gif',
-            'img/imgbox (46).gif',
-            'img/imgbox (47).gif',
-            'img/imgbox (48).gif',
-            'img/imgbox (49).gif',
-            'img/imgbox (50).gif',
-            'img/imgbox (51).gif',
-            'img/imgbox (52).gif',
-            'img/imgbox (53).gif',
-            'img/imgbox (54).gif',
-            'img/imgbox (55).gif',
-            'img/imgbox (56).gif',
-            'img/imgbox (57).gif',
-            'img/imgbox (58).gif',
-            'img/imgbox (59).gif',
-            'img/imgbox (60).gif',
-            'img/imgbox (61).gif',
-            'img/imgbox (62).gif',
-            'img/imgbox (63).gif',
-            'img/imgbox (64).gif',
-            'img/imgbox (65).gif'
-        ];
-
+		// WARNING: extreme computer science-y stuff below
         function makeQuadNode(depth) {
             var max = 2 + Math.floor(Math.random() * 3);
 
