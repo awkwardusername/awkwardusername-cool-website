@@ -14,7 +14,7 @@
             });
             
         // the images we have <del>stolen</del>
-        var imgCount = 85,
+        var imgCount = 107,
 			imgboxSrcs = [];
         
         // super one-liner (technically) loop.
