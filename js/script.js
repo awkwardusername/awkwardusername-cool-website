@@ -120,10 +120,9 @@
 		}, 50);
     }
     
-
-	resizeMainQuad();
     $(function() {
 		makeStaticTitle();
+		resizeMainQuad();
 		$(["#peiji"])
 			.each(function(i, x) {
 				$(x).css({ 'visibility': 'hidden' });
