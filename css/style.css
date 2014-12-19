@@ -94,7 +94,7 @@ h1 {
 }
 
 .imgbox {
-  background-repeat: repeat-x;
+  background-repeat: repeat;
   background-position: center;
   background-size: 175% auto;
   width: 100%;
