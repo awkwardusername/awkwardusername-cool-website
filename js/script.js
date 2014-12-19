@@ -129,7 +129,7 @@
     
     $(function() {
 		makeStaticTitle();
-		$(["#homu", "#peiji"])
+		$(["#peiji"])
 			.each(function(i, x) {
 				$(x).css({ 'visibility': 'hidden' });
 			});
@@ -140,7 +140,7 @@
 			.done(function() {
 				window.setTimeout(function() {
 					stopStaticTitle("あ");
-					$(["#homu", "#peiji"])
+					$(["#peiji"])
 						.each(function(i, x) {
 							$(x).css({ 'visibility': 'visible' });
 						});
