@@ -38,10 +38,10 @@
 
             var imgboxIndex = Math.floor(Math.random() * imgboxSrcs.length)
             if(depth >= max)
-				return '<div class="imgbox" style="border-width: 0 0 1px 1px; box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset; border-style: solid; border-color: black; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (1) + '"></div>';
+				return '<div class="imgbox" style="border-width: 0 0 1px 1px; box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset; border-style: solid; border-color: black; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (Math.random() * 2) + '"></div>';
                 //return '<div class="imgbox" style="border: 3px solid; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
             if(Number(new Date()) % 4 == 0 && depth > 1)
-				return '<div class="imgbox" style="border-width: 0 0 1px 1px; box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset; border-style: solid; border-color: black; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (1) + '"></div>';
+				return '<div class="imgbox" style="border-width: 0 0 1px 1px; box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset; border-style: solid; border-color: black; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (Math.random() * 2) + '"></div>';
                 //return '<div class="imgbox" style="border: 3px solid; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
 
             return [
