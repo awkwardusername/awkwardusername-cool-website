@@ -109,11 +109,6 @@
                 left: ($(sel).width() - quadWrapper.width()) / 2,
                 top: ($(sel).height() - quadWrapper.height()) / 2
             });
-            
-		$(sel)
-			.css({
-				'background-size': (window.innerHeight > window.innerWidth ? 'auto ' + (window.innerHeight * 1.5) + 'px' : (window.innerWidth * 1.5) + 'px auto')
-			});
     }
     
     function randInt(max) {
