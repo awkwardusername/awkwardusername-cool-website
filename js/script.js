@@ -61,8 +61,6 @@
                 .html(makeQuadNode(depth))
                 .appendTo(mainQuad);
         }
-
-		resizeMainQuad();
 		
         mainQuad
             .addClass('quad-wrapper')
@@ -122,6 +120,8 @@
 		}, 50);
     }
     
+
+	resizeMainQuad();
     $(function() {
 		makeStaticTitle();
 		$(["#peiji"])
