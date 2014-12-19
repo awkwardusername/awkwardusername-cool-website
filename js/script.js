@@ -55,6 +55,8 @@
         };
 
         mainQuad = $('<ul>');
+        
+        resizeMainQuad();
 
         for(var i = 1, depth = 0; i <= 4; i++) {
             $('<li>')
@@ -122,7 +124,6 @@
     
     $(function() {
 		makeStaticTitle();
-		resizeMainQuad();
 		$(["#peiji"])
 			.each(function(i, x) {
 				$(x).css({ 'visibility': 'hidden' });
