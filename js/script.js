@@ -1,8 +1,27 @@
 (function($) {
-	// state for blinking text
-    var blinkState = {};
+    var resizeId;
+    var staticIntervalId;
     
-    var resizeTimeout = false;
+    // the images we have <del>stolen</del>
+    var imgCount = 123;
+    var imgboxSrcs = [];
+    var imgboxes;
+    var mainQuad;
+    
+    function loadImages() {
+		// super one-liner (technically) loop.
+        for(var i = 1; i <= imgCount; imgboxSrcs.push(
+			'img/imgbox (' + i++ + ').gif'
+		));
+    }
+    
+    function cssUrl(src) {
+		return "url('" + src + "')";
+    }
+    
+    function getRandomImage() {
+		return imgboxSrcs[randInt(imgCount)];
+    }
 
 	// the awesomesauce
     function makeBg(sel) {
@@ -12,15 +31,6 @@
             .css({
                 overflow: 'hidden'
             });
-            
-        // the images we have <del>stolen</del>
-        var imgCount = 119,
-			imgboxSrcs = [];
-        
-        // super one-liner (technically) loop.
-        for(var i = 1; i <= imgCount; imgboxSrcs.push(
-			'img/imgbox (' + i++ + ').gif'
-		));
 
 		// WARNING: extreme computer science-y stuff below
         function makeQuadNode(depth) {
@@ -28,9 +38,11 @@
 
             var imgboxIndex = Math.floor(Math.random() * imgboxSrcs.length)
             if(depth >= max)
-                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
+				return '<div class="imgbox" style="border-width: 0 0 1px 1px; box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset; border-style: solid; border-color: black; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.5) + '"></div>';
+                //return '<div class="imgbox" style="border: 3px solid; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
             if(Number(new Date()) % 4 == 0 && depth > 1)
-                return '<div class="imgbox" style="background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
+				return '<div class="imgbox" style="border-width: 0 0 1px 1px; box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5) inset, -1px -1px 0 rgba(255, 255, 255, 0.5) inset; border-style: solid; border-color: black; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.5) + '"></div>';
+                //return '<div class="imgbox" style="border: 3px solid; background-image: url(\'' + imgboxSrcs[imgboxIndex] + '\'); opacity: ' + (0.15 + Math.random() / 2) + '"></div>';
 
             return [
                 '<ul class="quad-wrapper">',
@@ -42,7 +54,7 @@
             ].join('');
         };
 
-        var mainQuad = $('<ul>');
+        mainQuad = $('<ul>');
 
         for(var i = 1, depth = 0; i <= 4; i++) {
             $('<li>')
@@ -50,14 +62,42 @@
                 .appendTo(mainQuad);
         }
 
-        $(mainQuad)
+		resizeMainQuad();
+		
+        mainQuad
             .addClass('quad-wrapper')
             .css({
                 position: 'absolute',
-                width: 1600,
-                height: 1200
+                transform: 'rotate(0, 0, 0)'
             })
             .appendTo(sel);
+		imgboxes = $(sel).find('.imgbox');
+    }
+    
+    function makeStaticTitle() {
+		function makeStaticText(width) {
+			var staticTextBase = "░▒▓";
+			var staticText = "";
+			for(var i = 0; i < width; i++)
+				staticText += staticTextBase.charAt(Math.floor(Math.random() * staticTextBase.length));
+			return staticText;
+		};
+    
+		staticIntervalId = window.setInterval(function() {
+			$("title").text(makeStaticText(255));
+		}, 5);
+    }
+    
+    function stopStaticTitle(text) {
+		window.clearInterval(staticIntervalId);
+		$("title").text(text);
+    }
+    
+    function resizeMainQuad() {
+		mainQuad.css({
+			width: window.screen.width * 1.5,
+			height: window.screen.height * 1.5
+		});
     }
 
     function centerBg(sel) {
@@ -68,32 +108,53 @@
                 position: 'absolute',
                 left: ($(sel).width() - quadWrapper.width()) / 2,
                 top: ($(sel).height() - quadWrapper.height()) / 2
-            })
+            });
+            
+		$(sel)
+			.css({
+				'background-size': (window.innerHeight > window.innerWidth ? 'auto ' + (window.innerHeight * 1.5) + 'px' : (window.innerWidth * 1.5) + 'px auto')
+			});
     }
-
-    function blinkSel(sel, delay) {
-        if(!blinkState[sel])
-            blinkState[sel] = true;
-
-        window.setInterval(function() {
-            $(sel).css({ 'visibility': blinkState[sel] ? 'visible' : 'hidden' });
-            blinkState[sel] = !blinkState[sel];
-        }, delay);
+    
+    function randInt(max) {
+		return Math.floor(Math.random() * max);
     }
-
+    
+    function changeProgram() {
+		window.setInterval(function() {
+			$(imgboxes[randInt(imgboxes.length)])
+				.css('background-image', cssUrl(getRandomImage()));
+		}, 50);
+    }
+    
     $(function() {
+		makeStaticTitle();
+		$(["#homu", "#peiji"])
+			.each(function(i, x) {
+				$(x).css({ 'visibility': 'hidden' });
+			});
+		loadImages();
         makeBg("#homu");
         centerBg("#homu");
-        blinkSel("#main-content > *", 250);
+        $('#homu').imagesLoaded()
+			.done(function() {
+				window.setTimeout(function() {
+					stopStaticTitle("あ");
+					$(["#homu", "#peiji"])
+						.each(function(i, x) {
+							$(x).css({ 'visibility': 'visible' });
+						});
+					$("#homu")
+						.css({
+							'background': cssUrl(getRandomImage()) + " center no-repeat",
+							'background-size': (window.innerHeight > window.innerWidth ? 'auto ' + (window.innerHeight * 1.5) + 'px' : (window.innerWidth * 1.5) + 'px auto')
+						});
+					changeProgram();
+				}, 3000);
+			});
     });
 
     $(window).on('resize', function() {
-        centerBg("#homu");
+		centerBg("#homu");
     });
-
-    /*
-    $(window).on('resize', function() {
-        makeBg("#homu");
-    }, 250);
-    */
 })(window.jQuery);
