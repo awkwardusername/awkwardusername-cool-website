@@ -3,7 +3,7 @@
     var staticIntervalId;
     
     // the images we have <del>stolen</del>
-    var imgCount = 123;
+    var imgCount = 132;
     var imgboxSrcs = [];
     var imgboxes;
     var mainQuad;
