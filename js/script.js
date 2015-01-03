@@ -3,7 +3,7 @@
     var staticIntervalId;
     
     // the images we have <del>stolen</del>
-    var imgCount = 132;
+    var imgCount = 142;
     var imgboxSrcs = [];
     var imgboxes;
     var mainQuad;
@@ -133,6 +133,7 @@
     }
     
     $(function() {
+        var defaultTitle = $("title").text();
 		makeStaticTitle();
 		$(["#peiji"])
 			.each(function(i, x) {
@@ -144,7 +145,7 @@
         $('#homu').imagesLoaded()
 			.done(function() {
 				window.setTimeout(function() {
-					stopStaticTitle("あ");
+					stopStaticTitle(defaultTitle);
 					$(["#peiji"])
 						.each(function(i, x) {
 							$(x).css({ 'visibility': 'visible' });
